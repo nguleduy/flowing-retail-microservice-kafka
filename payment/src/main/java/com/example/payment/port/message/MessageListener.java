@@ -1,4 +1,4 @@
-package com.example.payment.port;
+package com.example.payment.port.message;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -38,8 +38,8 @@ public class MessageListener {
     messageSender.send( //
             new Message<PaymentReceivedEventPayload>( //
                     "PaymentReceivedEvent", //
+                    message.getTraceId(), //
                     new PaymentReceivedEventPayload() //
-                            .setRefId(retrievePaymentCommand.getRefId()), //
-                    message.getTraceId()));
+                            .setRefId(retrievePaymentCommand.getRefId())));
   }
 }

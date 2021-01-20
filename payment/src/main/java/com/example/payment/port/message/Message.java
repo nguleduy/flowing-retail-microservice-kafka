@@ -1,4 +1,4 @@
-package com.example.payment.port;
+package com.example.payment.port.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class Message<T> {
     this.payload = payload;
   }
 
-  public Message(String type, T payload, String traceId) {
+  public Message(String type, String traceId, T payload) {
     this.messageType = type;
     this.payload = payload;
     this.traceId = traceId;

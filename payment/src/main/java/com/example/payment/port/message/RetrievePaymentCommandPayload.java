@@ -1,4 +1,4 @@
-package com.example.payment.port;
+package com.example.payment.port.message;
 
 import lombok.Getter;
 import lombok.Setter;

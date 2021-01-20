@@ -1,5 +1,6 @@
-package com.example.payment.port;
+package com.example.payment.port.message;
 
+import com.example.payment.port.message.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
