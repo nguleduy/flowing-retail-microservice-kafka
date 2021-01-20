@@ -1,7 +1,9 @@
-package com.example.checkout.port;
+package com.example.checkout.port.web;
 
 import com.example.checkout.domain.Customer;
 import com.example.checkout.domain.Order;
+import com.example.checkout.port.message.Message;
+import com.example.checkout.port.message.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

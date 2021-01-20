@@ -1,4 +1,4 @@
-package com.example.checkout.conf;
+package com.example.checkout.port.web.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;

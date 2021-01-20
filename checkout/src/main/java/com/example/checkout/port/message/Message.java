@@ -1,4 +1,4 @@
-package com.example.checkout.port;
+package com.example.checkout.port.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +26,6 @@ public class Message<T> {
   public Message(String type, T payload) {
     this.messageType = type;
     this.payload = payload;
+    this.traceId = UUID.randomUUID().toString();
   }
 }

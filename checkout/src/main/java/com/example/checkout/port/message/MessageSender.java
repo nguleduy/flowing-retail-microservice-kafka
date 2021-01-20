@@ -1,4 +1,4 @@
-package com.example.checkout.port;
+package com.example.checkout.port.message;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
