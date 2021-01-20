@@ -1,9 +1,9 @@
-package com.example.order.application.adapter;
+package com.example.order.domain.adapter;
 
-import com.example.order.application.adapter.base.CommandPubEventSubAdapter;
+import com.example.order.domain.adapter.base.CommandPubEventSubAdapter;
 import com.example.order.domain.Order;
 import com.example.order.port.Message;
-import com.example.order.port.MessageSender;
+import com.example.order.port.outbound.MessageSender;
 import com.example.order.repository.OrderRepository;
 import org.camunda.bpm.engine.impl.pvm.delegate.ActivityExecution;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class RetrievePaymentAdapter extends CommandPubEventSubAdapter {
     messageSender.send( //
             new Message<>( //
                     "RetrievePaymentCommand", //
-                    new RetrievePaymentPayload() //
+                    new RetrievePaymentCommandPayload() //
                             .setRefId(order.getId()) //
                             .setAmount(order.getTotalSum()), //
                     execution.getBusinessKey()));

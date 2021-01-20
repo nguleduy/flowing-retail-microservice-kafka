@@ -1,7 +1,7 @@
-package com.example.order.application.adapter;
+package com.example.order.domain.adapter;
 
 import com.example.order.port.Message;
-import com.example.order.port.MessageSender;
+import com.example.order.port.outbound.MessageSender;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +21,8 @@ public class OrderCompletedAdapter implements JavaDelegate {
     messageSender.send( //
             new Message<>( //
                     "OrderCompletedEvent", //
-                    new OrderCompletedEvent() //
+                    new OrderCompletedEventPayload() //
                             .setOrderId(orderId), //
                     traceId));
-  }
-
-  public static class OrderCompletedEvent {
-    private String orderId;
-
-    public String getOrderId() {
-      return orderId;
-    }
-
-    public OrderCompletedEvent setOrderId(String orderId) {
-      this.orderId = orderId;
-      return this;
-    }
   }
 }

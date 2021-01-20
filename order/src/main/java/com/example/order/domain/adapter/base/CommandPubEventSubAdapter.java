@@ -1,4 +1,4 @@
-package com.example.order.application.adapter.base;
+package com.example.order.domain.adapter.base;
 
 import org.camunda.bpm.engine.impl.bpmn.behavior.AbstractBpmnActivityBehavior;
 import org.camunda.bpm.engine.impl.event.EventType;

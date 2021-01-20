@@ -1,6 +1,7 @@
-package com.example.order.port;
+package com.example.order.port.inbound;
 
 import com.example.order.domain.Order;
+import com.example.order.port.Message;
 import com.example.order.repository.OrderRepository;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,20 +27,13 @@ public class MessageListener {
   @Autowired
   private ProcessEngine camunda;
 
-
-//  @StreamListener(target = Sink.INPUT)
-//  @Transactional
-//  public void orderPlacedReceived1(String orderPlacedEventJsonString) throws JsonParseException, JsonMappingException, IOException {
-//    Message<Order> orderPlacedEvent = new ObjectMapper().readValue(orderPlacedEventJsonString, new TypeReference<Message<Order>>(){});
-//    Order order = orderPlacedEvent.getPayload();
-//    System.out.println(order);
-//  }
-
+  /**
+   * Handles incoming OrderPlacedEvents.
+   */
   @StreamListener(target = Sink.INPUT,
           condition = "payload.messageType.toString()=='OrderPlacedEvent'")
   @Transactional
   public void orderPlacedReceived(String messageJson) throws JsonParseException, JsonMappingException, IOException {
-//    System.out.println(orderPlacedEvent);
     Message<Order> message = new ObjectMapper().readValue(messageJson, new TypeReference<Message<Order>>() {
     });
     Order order = message.getPayload();

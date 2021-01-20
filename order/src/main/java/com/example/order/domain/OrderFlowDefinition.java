@@ -1,9 +1,9 @@
-package com.example.order.application;
+package com.example.order.domain;
 
-import com.example.order.application.adapter.FetchGoodsAdapter;
-import com.example.order.application.adapter.OrderCompletedAdapter;
-import com.example.order.application.adapter.RetrievePaymentAdapter;
-import com.example.order.application.adapter.ShipGoodsAdapter;
+import com.example.order.domain.adapter.FetchGoodsAdapter;
+import com.example.order.domain.adapter.OrderCompletedAdapter;
+import com.example.order.domain.adapter.RetrievePaymentAdapter;
+import com.example.order.domain.adapter.ShipGoodsAdapter;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 @Configuration
-public class CamundaFlowDefinition {
+public class OrderFlowDefinition {
 
   @Autowired
   private ProcessEngine engine;

@@ -1,4 +1,4 @@
-package com.example.order.application.adapter;
+package com.example.order.domain.adapter;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,23 +11,23 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RetrievePaymentPayload {
+public class RetrievePaymentCommandPayload {
 
   private String refId;
   private String reason;
   private int amount;
 
-  public RetrievePaymentPayload setRefId(String refId) {
+  public RetrievePaymentCommandPayload setRefId(String refId) {
     this.refId = refId;
     return this;
   }
 
-  public RetrievePaymentPayload setReason(String reason) {
+  public RetrievePaymentCommandPayload setReason(String reason) {
     this.reason = reason;
     return this;
   }
 
-  public RetrievePaymentPayload setAmount(int amount) {
+  public RetrievePaymentCommandPayload setAmount(int amount) {
     this.amount = amount;
     return this;
   }
