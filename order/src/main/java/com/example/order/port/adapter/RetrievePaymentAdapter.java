@@ -1,16 +1,16 @@
-package com.example.order.domain.adapter;
+package com.example.order.port.adapter;
 
-import com.example.order.domain.adapter.base.CommandPubEventSubAdapter;
 import com.example.order.domain.Order;
-import com.example.order.port.Message;
-import com.example.order.port.outbound.MessageSender;
+import com.example.order.port.adapter.base.PublishSubscribeAdapter;
+import com.example.order.port.message.Message;
+import com.example.order.port.message.MessageSender;
 import com.example.order.repository.OrderRepository;
 import org.camunda.bpm.engine.impl.pvm.delegate.ActivityExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RetrievePaymentAdapter extends CommandPubEventSubAdapter {
+public class RetrievePaymentAdapter extends PublishSubscribeAdapter {
 
   @Autowired
   private MessageSender messageSender;
@@ -19,18 +19,19 @@ public class RetrievePaymentAdapter extends CommandPubEventSubAdapter {
   private OrderRepository orderRepository;
 
   @Override
-  public void execute(ActivityExecution execution) throws Exception {
+  public void execute(ActivityExecution context) throws Exception {
     Order order = orderRepository.getOrder( //
-            (String) execution.getVariable("orderId"));
-
-    addMessageSubscription(execution, "PaymentReceivedEvent");
+            (String)context.getVariable("orderId"));
+    String traceId = context.getProcessBusinessKey();
 
     messageSender.send( //
             new Message<>( //
                     "RetrievePaymentCommand", //
+                    traceId, //
                     new RetrievePaymentCommandPayload() //
                             .setRefId(order.getId()) //
-                            .setAmount(order.getTotalSum()), //
-                    execution.getBusinessKey()));
+                            .setAmount(order.getTotalSum())));
+
+    addMessageSubscription(context, "PaymentReceivedEvent");
   }
 }

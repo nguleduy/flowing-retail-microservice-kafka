@@ -1,4 +1,4 @@
-package com.example.order.domain.adapter;
+package com.example.order.port.adapter;
 
 import com.example.order.domain.OrderItem;
 import lombok.Getter;

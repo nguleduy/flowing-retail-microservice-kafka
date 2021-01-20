@@ -1,6 +1,5 @@
-package com.example.order.port.outbound;
+package com.example.order.port.message;
 
-import com.example.order.port.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;

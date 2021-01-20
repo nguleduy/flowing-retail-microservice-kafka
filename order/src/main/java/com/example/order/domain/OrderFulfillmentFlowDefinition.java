@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 @Configuration
-public class OrderFlowDefinition {
+public class OrderFulfillmentFlowDefinition {
 
   @Autowired
   private ProcessEngine engine;
@@ -28,8 +28,9 @@ public class OrderFlowDefinition {
                     .startEvent().message("OrderPlacedEvent")
                     .serviceTask().name("Retrieve payment").camundaDelegateExpression(exp(RetrievePaymentAdapter.class))
                     .serviceTask().name("Fetch goods").camundaDelegateExpression(exp(FetchGoodsAdapter.class))
+                    .camundaOutputParameter("pickId", "#{PAYLOAD_GoodsFetchedEvent.jsonPath('$.pickId').stringValue()}")
                     .serviceTask().name("Ship goods").camundaDelegateExpression(exp(ShipGoodsAdapter.class))
-                    .endEvent().camundaExecutionListenerClass("end", exp(OrderCompletedAdapter.class))
+                    .endEvent().camundaExecutionListenerDelegateExpression("end", exp(OrderCompletedAdapter.class))
                     .done()
             ).deploy();
   }

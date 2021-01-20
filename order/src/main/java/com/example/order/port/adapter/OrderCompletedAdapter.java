@@ -1,7 +1,7 @@
-package com.example.order.domain.adapter;
+package com.example.order.port.adapter;
 
-import com.example.order.port.Message;
-import com.example.order.port.outbound.MessageSender;
+import com.example.order.port.message.Message;
+import com.example.order.port.message.MessageSender;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +14,15 @@ public class OrderCompletedAdapter implements JavaDelegate {
   private MessageSender messageSender;
 
   @Override
-  public void execute(DelegateExecution execution) throws Exception {
-    String orderId = (String) execution.getVariable("orderId");
-    String traceId = (String) execution.getVariable("traceId"); // Business key?
+  public void execute(DelegateExecution context) throws Exception {
+    String orderId = (String)context.getVariable("orderId");
+    String traceId = context.getProcessBusinessKey();
 
     messageSender.send( //
             new Message<>( //
                     "OrderCompletedEvent", //
+                    traceId, //
                     new OrderCompletedEventPayload() //
-                            .setOrderId(orderId), //
-                    traceId));
+                            .setOrderId(orderId)));
   }
 }
