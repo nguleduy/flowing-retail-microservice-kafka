@@ -1,16 +1,16 @@
 package com.example.order.port.adapter;
 
 import com.example.order.domain.Order;
-import com.example.order.port.adapter.base.PublishSubscribeAdapter;
 import com.example.order.port.message.Message;
 import com.example.order.port.message.MessageSender;
 import com.example.order.repository.OrderRepository;
-import org.camunda.bpm.engine.impl.pvm.delegate.ActivityExecution;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ShipGoodsAdapter extends PublishSubscribeAdapter {
+public class ShipGoodsAdapter implements JavaDelegate {
 
   @Autowired
   private MessageSender messageSender;
@@ -19,10 +19,10 @@ public class ShipGoodsAdapter extends PublishSubscribeAdapter {
   private OrderRepository orderRepository;
 
   @Override
-  public void execute(ActivityExecution context) throws Exception {
+  public void execute(DelegateExecution context) throws Exception {
     Order order = orderRepository.getOrder( //
-            (String)context.getVariable("orderId"));
-    String pickId = (String)context.getVariable("pickId"); // TODO read from step before!
+            (String) context.getVariable("orderId"));
+    String pickId = (String) context.getVariable("pickId"); // TODO read from step before!
     String traceId = context.getProcessBusinessKey();
 
     messageSender.send(new Message<>( //
@@ -32,7 +32,5 @@ public class ShipGoodsAdapter extends PublishSubscribeAdapter {
                     .setPickId(order.getId()) //
                     .setRecipientName(order.getCustomer().getName()) //
                     .setRecipientAddress(order.getCustomer().getAddress())));
-
-    addMessageSubscription(context, "GoodsShippedEvent");
   }
 }
