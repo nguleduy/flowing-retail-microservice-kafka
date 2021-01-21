@@ -31,7 +31,7 @@ public class MessageListener {
     Message<RetrievePaymentCommandPayload> message = new ObjectMapper().readValue(messageJson, new TypeReference<Message<RetrievePaymentCommandPayload>>() {
     });
     RetrievePaymentCommandPayload retrievePaymentCommand = message.getPayload();
-    System.out.println(retrievePaymentCommand);
+    System.out.println("Retrieve payment: " + retrievePaymentCommand.getAmount() + " for " + retrievePaymentCommand.getRefId());
 
     // and directly send response
 

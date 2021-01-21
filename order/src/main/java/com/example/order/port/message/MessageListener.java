@@ -38,7 +38,7 @@ public class MessageListener {
     Message<Order> message = new ObjectMapper().readValue(messageJson, new TypeReference<Message<Order>>() {
     });
     Order order = message.getPayload();
-    System.out.println(order);
+    System.out.println("New order placed, start flow. " + order);
 
     // persist domain entity
     repository.persistOrder(order);
@@ -75,6 +75,7 @@ public class MessageListener {
             .count();
 
     if (correlatingInstances == 1) {
+      System.out.println("Correlating " + message + " to waiting flow instance");
       camunda.getRuntimeService().createMessageCorrelation(message.getMessageType())
               .processInstanceBusinessKey(message.getTraceId())
               .setVariable(//
@@ -88,8 +89,4 @@ public class MessageListener {
 
   }
 
-//  @StreamListener(target = Sink.INPUT)
-//  public void handleDefaultEvent(@Payload String payload) {
-//    System.out.println("Received payload: " + payload);
-//  }
 }

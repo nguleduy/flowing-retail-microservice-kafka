@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class ShipGoodsCommandPayload {
 
+  private String refId;
   private String pickId;
   private String logisticsProvider;
   private String recipientName;

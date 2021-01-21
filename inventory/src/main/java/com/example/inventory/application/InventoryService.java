@@ -1,11 +1,14 @@
 package com.example.inventory.application;
 
 import com.example.inventory.domain.Item;
+import com.example.inventory.domain.PickOrder;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Component
 public class InventoryService {
 
   public static InventoryService instance = new InventoryService();
@@ -37,8 +40,9 @@ public class InventoryService {
    * @return a unique pick ID
    */
   public String pickItems(List<Item> items, String reason, String refId) {
-    // TODO: Implement
-    return UUID.randomUUID().toString();
+    PickOrder pickOrder = new PickOrder().setItems(items);
+    System.out.println("# Items picked: " + pickOrder);
+    return pickOrder.getPickId();
   }
 
   /**

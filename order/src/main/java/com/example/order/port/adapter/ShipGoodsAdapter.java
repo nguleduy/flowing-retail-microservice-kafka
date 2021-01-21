@@ -29,7 +29,7 @@ public class ShipGoodsAdapter extends PublishSubscribeAdapter {
             "ShipGoodsCommand", //
             traceId, //
             new ShipGoodsCommandPayload() //
-                    .setPickId(pickId) //
+                    .setPickId(order.getId()) //
                     .setRecipientName(order.getCustomer().getName()) //
                     .setRecipientAddress(order.getCustomer().getAddress())));
 

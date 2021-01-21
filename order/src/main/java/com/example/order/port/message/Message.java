@@ -19,6 +19,7 @@ public class Message<T> {
   private String messageType;
   private String id = UUID.randomUUID().toString(); // unique id of this message
   private String traceId = UUID.randomUUID().toString(); // trace id, default: new unique
+  private String sender = "Order";
   private Date timestamp = new Date();
 
   private T payload;
