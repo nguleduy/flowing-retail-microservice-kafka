@@ -21,7 +21,7 @@ function newEventReceived(event) {
 
     if (!eventsPerTransaction[jsTransactionId]) {
         eventsPerTransaction[jsTransactionId] = [];
-        $("#events").prepend('<tr><td>' + event.transactionId + '</td><td id="' + event.transactionId + '"></td></tr>');
+        $("#events").prepend('<tr><td><a href="/bpmn.html?traceId=' + event.transactionId + '" target="blank_">' + event.transactionId + '</a></td><td id="' + event.transactionId + '"></td></tr>');
     }
 
     eventsPerTransaction[jsTransactionId].push(event);
