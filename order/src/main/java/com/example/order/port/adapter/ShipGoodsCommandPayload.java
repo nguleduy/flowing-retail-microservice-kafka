@@ -13,11 +13,16 @@ import lombok.ToString;
 @ToString
 public class ShipGoodsCommandPayload {
 
+  private String refId;
   private String pickId;
-  // assume we always use the same provider for customer orders
-  private String logisticsProvider = "DHL";
+  private String logisticsProvider;
   private String recipientName;
   private String recipientAddress;
+
+  public ShipGoodsCommandPayload setRefId(String refId) {
+    this.refId = refId;
+    return this;
+  }
 
   public ShipGoodsCommandPayload setPickId(String pickId) {
     this.pickId = pickId;
