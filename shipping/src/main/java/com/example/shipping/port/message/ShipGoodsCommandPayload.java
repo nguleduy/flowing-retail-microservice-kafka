@@ -19,6 +19,11 @@ public class ShipGoodsCommandPayload {
   private String recipientName;
   private String recipientAddress;
 
+  public ShipGoodsCommandPayload setRefId(String refId) {
+    this.refId = refId;
+    return this;
+  }
+
   public ShipGoodsCommandPayload setPickId(String pickId) {
     this.pickId = pickId;
     return this;
